@@ -3,8 +3,10 @@ public class Auteur implements MethodeCommune{
     private String DateNaissance;
     private String Biographie;
 
-    public Auteur(String nom, String dateNaissance, String biographie) {
+    public Auteur(String nom) {
         this.Nom = nom;
+    }
+    public Auteur(String nom, String dateNaissance, String biographie){
         this.DateNaissance = dateNaissance;
         this.Biographie = biographie;
     }
@@ -18,11 +20,16 @@ public class Auteur implements MethodeCommune{
     public String getBiographie() {
         return Biographie;
     }
-    @Override
+
     //afficher les details sur l'auteur
-    public void AfficherDetails(){
+    public void AfficherDetailsComplet(){
         System.out.println("NOM : "+getNom());
         System.out.println("Date de naissance : "+getDateNaissance());
         System.out.println("Bio : "+getBiographie());
+    }
+
+    @Override
+    public void AfficherDetails(){
+        System.out.println("NOM : "+getNom());
     }
 }

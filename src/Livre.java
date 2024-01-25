@@ -1,14 +1,12 @@
-import java.util.ArrayList;
-
 public class Livre implements MethodeCommune{
     private int Id;
     private static int dernierId = 0;
     private String Titre;
-    private String Auteur;
+    private Auteur Auteur;
     private String Edition;
     private String Categorie; //la categorie c'est LivreScientifique ou Roman ou Poesie...
     private int QuantiteDisponible;
-    public Livre(String titre,String auteur,String edition,String categorie, int Qte){
+    public Livre(String titre,Auteur auteur,String edition,String categorie, int Qte){
         this.Id = dernierId++;
         this.Titre = titre;
         this.Auteur = auteur;
@@ -24,7 +22,7 @@ public class Livre implements MethodeCommune{
         return Titre;
     }
 
-    public String getAuteur() {
+    public Auteur getAuteur() {
         return Auteur;
     }
 
@@ -48,7 +46,7 @@ public class Livre implements MethodeCommune{
     public void AfficherDetails(){ //methode pour affischer les details des livres
         System.out.println("ID : "+getId());
         System.out.println("Titre : "+getTitre());
-        System.out.println("Auteur : "+getAuteur());
+        System.out.println("Auteur : "+getAuteur().getNom());
         System.out.println("Edition : "+getEdition());
         System.out.println("QuantiteDisponible : "+getQuantiteDisponible());
         System.out.println();

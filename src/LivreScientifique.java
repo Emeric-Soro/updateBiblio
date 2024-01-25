@@ -3,7 +3,7 @@ public class LivreScientifique extends Livre{
     private String Niveau;
     private String Genre;
 
-    public LivreScientifique(String titre, String auteur, String edition,String categorie, int Qte, String domaine, String niveau,String genre) {
+    public LivreScientifique(String titre, Auteur auteur, String edition,String categorie, int Qte, String domaine, String niveau,String genre) {
         super(titre, auteur, edition,categorie, Qte);
         this.Domaine = domaine;
         this.Niveau = niveau;

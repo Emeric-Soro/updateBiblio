@@ -27,7 +27,7 @@ public class Bibliotheque {
         ArrayList<Livre> resultat = new ArrayList<>();
         for (Livre l : inventaire) {
             if (l.getTitre().toLowerCase().matches(Critere.toLowerCase()) ||    //cherche en fonction du titre,l'auteur ou la categorie
-                    l.getAuteur().toLowerCase().matches(Critere.toLowerCase()) ||
+                    l.getAuteur().getNom().toLowerCase().matches(Critere) ||
                     l.getCategorie().toLowerCase().matches(Critere.toLowerCase())) {
                 resultat.add(l); //des qu'il y'a une correspondance on enregistre cette correspondance dans la liste resultat cree au dessus
             }

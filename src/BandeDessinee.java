@@ -1,6 +1,6 @@
 public class BandeDessinee extends Livre {
     String Genre;
-    public BandeDessinee(String titre, String auteur, String edition, String categorie, int Qte, String genre) {
+    public BandeDessinee(String titre, Auteur auteur, String edition, String categorie, int Qte, String genre) {
         super(titre, auteur, edition, categorie, Qte);
         this.Genre = genre;
     }

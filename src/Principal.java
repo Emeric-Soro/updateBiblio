@@ -7,7 +7,7 @@ public class Principal{
         Scanner scan = new Scanner(System.in);
 
         int Id; int choix = 0; int choixId = 0; int Quantite = 0;
-        String Titre; String Auteur; String Edition; String Categorie; String Domaine; String Niveau; String Genre; String CritereRecherche;
+        String Titre;String NomAuteur ; Auteur auteur; String Edition; String Categorie; String Domaine; String Niveau; String Genre; String CritereRecherche;
         String Nom; String Prenom; String Adresse; String NumeroTel; String Departement; String Classe;
         boolean validation = false;
 
@@ -15,25 +15,39 @@ public class Principal{
         Bibliotheque biblio = new Bibliotheque();
 
         //je cree des instance de livre pour pouvoir commencer le test directement
-        Roman R1 = new Roman("La Peste","Albert Camus","Folio", "Roman",10,"fiction philosophique");
-        Roman R2 = new Roman("L'Etranger","Albert Camus","Folio","Roman", 12,"fiction Absurde");
-        Roman R3 = new Roman("Les soleils des l'independances","Amadou Kourouma","Presence Africaine","Roman",15,"fiction,engagee");
+        Auteur A1 = new Auteur("Albert Camus");
+        Roman R1 = new Roman("La Peste",A1,"Folio", "Roman",10,"fiction philosophique");
+        Roman R2 = new Roman("L'Etranger",A1,"Folio","Roman", 12,"fiction Absurde");
+        Auteur A2 = new Auteur("Amadou Kourouma");
+        Roman R3 = new Roman("Les soleils des l'independances",A2,"Presence Africaine","Roman",15,"fiction,engagee");
 
-        BandeDessinee BD1 = new BandeDessinee("Berserk", "Kentaro Miura","Jump","Bande Desinee",0,"Manga");
+        Auteur A3 = new Auteur("Kentaro Miura");
+        BandeDessinee BD1 = new BandeDessinee("Berserk", A3,"Jump","Bande Desinee",0,"Manga");
 
-        LivreScientifique LS1 = new LivreScientifique("Micrographia","Robert Hooke","ScienceF","Livre Scientifique",
+        Auteur A4 = new Auteur("Robert Hooke");
+        LivreScientifique LS1 = new LivreScientifique("Micrographia",A4,"ScienceF","Livre Scientifique",
                                                       6,"Biologie","Avancé","Mode d'emploie");
 
-        LivreTheatrale LT1 = new LivreTheatrale("Romeo et Juliette","William Shakespeare","Magnard","Livre Theatrale",
+        Auteur A5 = new Auteur("William Shakespeare");
+        LivreTheatrale LT1 = new LivreTheatrale("Romeo et Juliette",A5,"Magnard","Livre Theatrale",
                                                 3,"Romance");
 
-        Poesie Po1 = new Poesie("Coup de pilon","David Diop","Presence Africaine","Poesie",10,"Poesi engagee");
+        Auteur A6 = new Auteur("David Diop");
+        Poesie Po1 = new Poesie("Coup de pilon",A6,"Presence Africaine","Poesie",10,"Poesi engagee");
 
         //pareille ici je cree des instance d'utilisateur deja pret a etre utiliser
         Professeur P1 = new Professeur("Satoru","Gojo","Abidjan","0123456789","Math-info");
         Etudiant E1 = new Etudiant("Kouame","Brunelle", "Rue de la BIA","0787547896","L2-Droit");
         Etudiant E2 = new Etudiant("Assy","Eliel","Yopougon","0142568975","L2-MIAGE");
         Etudiant E3 = new Etudiant("Soro","Emeric","Cocody","0787154863","L2-MIAGE");
+
+        //j'enregistre les auteurs
+        biblio.AjouterAuteur(A1);
+        biblio.AjouterAuteur(A2);
+        biblio.AjouterAuteur(A3);
+        biblio.AjouterAuteur(A4);
+        biblio.AjouterAuteur(A5);
+        biblio.AjouterAuteur(A6);
 
         //j'enregisqtre les utilisateurs
         biblio.AjouterUtilisateur(E1);
@@ -150,8 +164,9 @@ public class Principal{
                         System.out.println("\tTitre du livre : ");
                         Titre = scan.nextLine();
 
-                        System.out.println("\tAuteur : ");
-                        Auteur = scan.nextLine();
+                        System.out.println("\tnom de l'auteur : ");
+                        NomAuteur = scan.nextLine();
+                        auteur = new Auteur(NomAuteur);
 
                         System.out.println("\tEdition : ");
                         Edition = scan.nextLine();
@@ -173,7 +188,7 @@ public class Principal{
                         Niveau = scan.nextLine();
 
                         //je cree une nouvelle instance de Livre scientifique
-                        LivreScientifique NLS = new LivreScientifique(Titre, Auteur, Edition, Categorie, Quantite,Genre, Domaine, Niveau);
+                        LivreScientifique NLS = new LivreScientifique(Titre, auteur, Edition, Categorie, Quantite,Genre, Domaine, Niveau);
                         biblio.AjouterLivre(NLS); //NLS pour nouveau livre scientifique. ici grace au polymorphisme
 
                         System.out.println("\tnouveau livre ajouter !\n\n");
@@ -185,8 +200,9 @@ public class Principal{
                         System.out.println("\tTitre du livre : ");
                         Titre = scan.nextLine();
 
-                        System.out.println("\tAuteur : ");
-                        Auteur = scan.nextLine();
+                        System.out.println("\tnom de l'auteur : ");
+                        NomAuteur = scan.nextLine();
+                        auteur = new Auteur(NomAuteur);
 
                         System.out.println("\tEdition : ");
                         Edition = scan.nextLine();
@@ -201,7 +217,7 @@ public class Principal{
                         System.out.println("\tGenre : ");
                         Genre = scan.nextLine();
 
-                        Roman NLR = new Roman(Titre, Auteur, Edition, Categorie, Quantite, Genre);
+                        Roman NLR = new Roman(Titre, auteur, Edition, Categorie, Quantite, Genre);
                         biblio.AjouterLivre(NLR);
 
                         System.out.println("\tnouveau livre ajouter !\n\n");
@@ -211,8 +227,9 @@ public class Principal{
                         System.out.println("\tTitre du livre : ");
                         Titre = scan.nextLine();
 
-                        System.out.println("\tAuteur : ");
-                        Auteur = scan.nextLine();
+                        System.out.println("\tnom de l'auteur : ");
+                        NomAuteur = scan.nextLine();
+                        auteur = new Auteur(NomAuteur);
 
                         System.out.println("\tEdition : ");
                         Edition = scan.nextLine();
@@ -227,7 +244,7 @@ public class Principal{
                         System.out.println("\tGenre : ");
                         Genre = scan.nextLine();
 
-                        Poesie NLP = new Poesie(Titre, Auteur, Edition, Categorie, Quantite, Genre);
+                        Poesie NLP = new Poesie(Titre, auteur, Edition, Categorie, Quantite, Genre);
                         biblio.AjouterLivre(NLP);
 
                         System.out.println("\tnouveau livre ajouter !\n\n");
@@ -237,8 +254,9 @@ public class Principal{
                         System.out.println("\tTitre du livre : ");
                         Titre = scan.nextLine();
 
-                        System.out.println("\tAuteur : ");
-                        Auteur = scan.nextLine();
+                        System.out.println("\tnom de l'auteur : ");
+                        NomAuteur = scan.nextLine();
+                        auteur = new Auteur(NomAuteur);
 
                         System.out.println("\tEdition : ");
                         Edition = scan.nextLine();
@@ -253,7 +271,7 @@ public class Principal{
                         System.out.println("\tGenre : ");
                         Genre = scan.nextLine();
 
-                        LivreTheatrale NLT = new LivreTheatrale(Titre, Auteur, Edition, Categorie, Quantite, Genre);
+                        LivreTheatrale NLT = new LivreTheatrale(Titre, auteur, Edition, Categorie, Quantite, Genre);
                         biblio.AjouterLivre(NLT);
 
                         System.out.println("\tnouveau livre ajouter !\n\n");
@@ -263,8 +281,9 @@ public class Principal{
                         System.out.println("\tTitre du livre : ");
                         Titre = scan.nextLine();
 
-                        System.out.println("\tAuteur : ");
-                        Auteur = scan.nextLine();
+                        System.out.println("\tnom de l'auteur : ");
+                        NomAuteur = scan.nextLine();
+                        auteur = new Auteur(NomAuteur);
 
                         System.out.println("\tEdition : ");
                         Edition = scan.nextLine();
@@ -279,7 +298,7 @@ public class Principal{
                         System.out.println("\tGenre : ");
                         Genre = scan.nextLine();
 
-                        BandeDessinee NLBD = new BandeDessinee(Titre, Auteur, Edition,Categorie, Quantite, Genre);
+                        BandeDessinee NLBD = new BandeDessinee(Titre, auteur, Edition,Categorie, Quantite, Genre);
                         biblio.AjouterLivre(NLBD);
 
                         System.out.println("\tnouveau livre ajouter !\n\n");
@@ -323,8 +342,9 @@ public class Principal{
                                 System.out.println("\tTitre du livre : ");
                                 Titre = scan.nextLine();
 
-                                System.out.println("\tAuteur : ");
-                                Auteur = scan.nextLine();
+                                System.out.println("\tnom de l'auteur : ");
+                                NomAuteur = scan.nextLine();
+                                auteur = new Auteur(NomAuteur);
 
                                 System.out.println("\tEdition : ");
                                 Edition = scan.nextLine();
@@ -346,7 +366,7 @@ public class Principal{
                                 Niveau = scan.nextLine();
 
                                 //je cree une nouvelle instance de Livre scientifique
-                                LivreScientifique NLS = new LivreScientifique(Titre, Auteur, Edition, Categorie, Quantite,Genre, Domaine, Niveau);
+                                LivreScientifique NLS = new LivreScientifique(Titre, auteur, Edition, Categorie, Quantite,Genre, Domaine, Niveau);
                                 biblio.AjouterLivre(NLS); //NLS pour nouveau livre scientifique. ici grace au polymorphisme
 
                                 System.out.println("\tnouveau livre ajouter !\n\n");
@@ -358,8 +378,9 @@ public class Principal{
                                 System.out.println("\tTitre du livre : ");
                                 Titre = scan.nextLine();
 
-                                System.out.println("\tAuteur : ");
-                                Auteur = scan.nextLine();
+                                System.out.println("\tnom de l'auteur : ");
+                                NomAuteur = scan.nextLine();
+                                auteur = new Auteur(NomAuteur);
 
                                 System.out.println("\tEdition : ");
                                 Edition = scan.nextLine();
@@ -374,7 +395,7 @@ public class Principal{
                                 System.out.println("\tGenre : ");
                                 Genre = scan.nextLine();
 
-                                Roman NLR = new Roman(Titre, Auteur, Edition, Categorie, Quantite, Genre);
+                                Roman NLR = new Roman(Titre, auteur, Edition, Categorie, Quantite, Genre);
                                 biblio.AjouterLivre(NLR);
 
                                 System.out.println("\tnouveau livre ajouter !\n\n");
@@ -384,8 +405,9 @@ public class Principal{
                                 System.out.println("\tTitre du livre : ");
                                 Titre = scan.nextLine();
 
-                                System.out.println("\tAuteur : ");
-                                Auteur = scan.nextLine();
+                                System.out.println("\tnom de l'auteur : ");
+                                NomAuteur = scan.nextLine();
+                                auteur = new Auteur(NomAuteur);
 
                                 System.out.println("\tEdition : ");
                                 Edition = scan.nextLine();
@@ -400,7 +422,7 @@ public class Principal{
                                 System.out.println("\tGenre : ");
                                 Genre = scan.nextLine();
 
-                                Poesie NLP = new Poesie(Titre, Auteur, Edition, Categorie, Quantite, Genre);
+                                Poesie NLP = new Poesie(Titre, auteur, Edition, Categorie, Quantite, Genre);
                                 biblio.AjouterLivre(NLP);
 
                                 System.out.println("\tnouveau livre ajouter !\n\n");
@@ -410,8 +432,9 @@ public class Principal{
                                 System.out.println("\tTitre du livre : ");
                                 Titre = scan.nextLine();
 
-                                System.out.println("\tAuteur : ");
-                                Auteur = scan.nextLine();
+                                System.out.println("\tnom de l'auteur : ");
+                                NomAuteur = scan.nextLine();
+                                auteur = new Auteur(NomAuteur);
 
                                 System.out.println("\tEdition : ");
                                 Edition = scan.nextLine();
@@ -426,7 +449,7 @@ public class Principal{
                                 System.out.println("\tGenre : ");
                                 Genre = scan.nextLine();
 
-                                LivreTheatrale NLT = new LivreTheatrale(Titre, Auteur, Edition, Categorie, Quantite, Genre);
+                                LivreTheatrale NLT = new LivreTheatrale(Titre, auteur, Edition, Categorie, Quantite, Genre);
                                 biblio.AjouterLivre(NLT);
 
                                 System.out.println("\tnouveau livre ajouter !\n\n");
@@ -436,8 +459,9 @@ public class Principal{
                                 System.out.println("\tTitre du livre : ");
                                 Titre = scan.nextLine();
 
-                                System.out.println("\tAuteur : ");
-                                Auteur = scan.nextLine();
+                                System.out.println("\tnom de l'auteur : ");
+                                NomAuteur = scan.nextLine();
+                                auteur = new Auteur(NomAuteur);
 
                                 System.out.println("\tEdition : ");
                                 Edition = scan.nextLine();
@@ -452,7 +476,7 @@ public class Principal{
                                 System.out.println("\tGenre : ");
                                 Genre = scan.nextLine();
 
-                                BandeDessinee NLBD = new BandeDessinee(Titre, Auteur, Edition,Categorie, Quantite, Genre);
+                                BandeDessinee NLBD = new BandeDessinee(Titre, auteur, Edition,Categorie, Quantite, Genre);
                                 biblio.AjouterLivre(NLBD);
 
                                 System.out.println("\tnouveau livre ajouter !\n\n");
